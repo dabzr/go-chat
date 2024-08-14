@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"net"
-	"os"
+  "fmt"
+  "net"
+  "os"
   "net/http"
   "io"
 )
@@ -28,17 +28,11 @@ func getPrivateIPV4(){
 func getPublicIPV4(){
   url := "https://api.ipify.org?format=text"
   resp, err := http.Get(url)
-  if err != nil {
-      fmt.Println("Erro ao fazer a solicitação:", err)
-      return
-  }
+  verifyError(err)
   defer resp.Body.Close()
 
   ip, err := io.ReadAll(resp.Body)
-  if err != nil {
-      fmt.Println("Erro ao ler a resposta:", err)
-      return
-  }
+  verifyError(err)
 
   fmt.Printf("Seu IP público é: %s\n", ip)
 }
